@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+$primary1: #00A7B4;
+$primary2: #A4D96C;
+
+@layer base {
+  body {
+    @apply bg-white text-secondary;
+  }
+}
+
+@layer components {
+  .container-form {
+    @apply m-4 font-body w-[80%] max-w-[700px] min-w-[350px] mx-auto bg-white text-black rounded-lg py-5 px-10;
+  }
+  .bg-linear{
+    background: linear-gradient(107.61deg, $primary1 15.59%, $primary2 87.25%);
+  }
+}

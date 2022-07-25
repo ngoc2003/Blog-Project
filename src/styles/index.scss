@@ -7,7 +7,7 @@ $primary2: #a4d96c;
 
 @layer base {
   body {
-    @apply bg-white text-secondary;
+    @apply bg-primary text-secondary;
   }
 }
 
@@ -16,7 +16,7 @@ $primary2: #a4d96c;
     @apply m-4 font-body w-[80%] max-w-[600px] min-w-[350px] mx-auto bg-white text-black rounded-lg py-5 px-10;
   }
   .container-page{
-    @apply max-w-[1180px] mx-auto w-full p-5
+    @apply max-w-[1180px] mx-auto w-full 
   }
   .bg-linear {
     background: linear-gradient(107.61deg, $primary1 15.59%, $primary2 87.25%);
@@ -32,5 +32,13 @@ $primary2: #a4d96c;
   }
   .errorMessage {
     @apply absolute left-3 -bottom-5  text-sm text-red-500;
+  }
+  .navbar-active{
+    @apply text-primary relative;
+    &::after{
+      content:'';
+      @apply block absolute left-1/2 -bottom-2 bg-primary h-1 w-5 rounded-full -translate-x-1/2
+    }
+
   }
 }

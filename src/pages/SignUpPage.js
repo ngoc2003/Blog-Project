@@ -1,64 +1,126 @@
-import React, { useState } from "react";
-import { Input } from "../components/input";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import { IconEyeClose, IconEyeOpen } from "../components/icon/IconEye";
+import { Button } from "../components/button";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db } from "../firebase/firebase.config";
+import { useNavigate } from "react-router-dom";
+import { addDoc, collection } from "firebase/firestore";
+import AuthenticationPage from "./AuthenticationPage";
 // import logo from "../../public/logo.png";
-// import styled from 'styled-components';
 
 const SignUpPage = () => {
   const [togglePassword, setTogglePassword] = useState(false);
-  const {
-    control,
-    handleSubmit,
-    watch,
-    formState: { errors, isValid, isSubmitting },
-  } = useForm();
-  function handleSignUp(values) {
-    console.log(values);
+  const navigate = useNavigate();
+  useEffect(() => {
+    document.title = "Sign Up";
+  }, []);
+  async function handleSignUp(values) {
+    const user = await createUserWithEmailAndPassword(
+      auth,
+      values.email,
+      values.password
+    );
+    await updateProfile(auth.currentUser, {
+      displayName: values.fullName,
+    });
+    toast.success("Đăng kí thành công", {
+      pauseOnHover: false,
+      autoClose: 2000,
+    });
+    const collectionRef = collection(db, "users");
+    await addDoc(collectionRef, {
+      fullName: values.fullName,
+      email: values.email,
+      password: values.password,
+    });
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
   }
-  return (
-    <div className="bg-primary h-screen flex items-center justify-center">
-      <div className="container-form flex flex-col items-center">
-        {/* <img className="w-[12rem]" srcSet="/logo.png 2x" alt="logo" /> */}
-        <h1 className="text-4xl text-primary font-bold p-7">
-          Create Your Account
-        </h1>
-        <form className="w-full" onSubmit={handleSignUp}>
-          <Input
-            control={control}
-            name="fullname"
-            placeholder="Enter Your Full Name . . ."
-          ></Input>
-          <Input
-            control={control}
-            name="email"
-            placeholder="Enter Your Email . . ."
-          ></Input>
-          <Input
-            type={togglePassword ? "text" : "password"}
-            control={control}
-            name="password"
-            placeholder="Enter Your Password . . ."
-            hasIcon
-          >
-            {togglePassword ? (
-              <IconEyeOpen
-                onClick={() => setTogglePassword(false)}
-              ></IconEyeOpen>
-            ) : (
-              <IconEyeClose
-                onClick={() => setTogglePassword(true)}
-              ></IconEyeClose>
-            )}
-          </Input>
 
-          {/* <div className="form-choose-btn flex justify-between my-4">
-            <button className="border border-primary w-[48%] rounded-lg text-primary font-bold p-3 ">Cancel</button>
-            <button type="submit" className="bg-primary w-[48%] rounded-lg text-white font-bold p-3 ">Sign Up</button>
-          </div> */}
-        </form>
-      </div>
-    </div>
+  return (
+    <AuthenticationPage title={"Create Your Account"}>
+      <Formik
+        initialValues={{
+          fullName: "",
+          email: "",
+          password: "",
+        }}
+        validationSchema={Yup.object({
+          fullName: Yup.string().required("Vui Lòng Điền Trường Này"),
+          email: Yup.string()
+            .email("E-mail của bạn không hợp lệ")
+            .required("Vui Lòng Điền Trường Này"),
+          password: Yup.string()
+            .min(6, "Tối thiểu 6 kí tự")
+            .required("Vui Lòng Điền Trường Này"),
+        })}
+        onSubmit={(values) => {
+          handleSignUp(values);
+        }}
+      >
+        {({ errors, touched }) => {
+          return (
+            <Form className="w-full">
+              <div className="field">
+                <Field
+                  className="input"
+                  name="fullName"
+                  placeholder="Enter Your Full Name . . ."
+                ></Field>
+                {errors.fullName && touched.fullName && (
+                  <div className="errorMessage">{errors.fullName}</div>
+                )}
+              </div>
+              <div className="field">
+                <Field
+                  className="input"
+                  name="email"
+                  placeholder="Enter Your Email . . ."
+                ></Field>
+                {errors.email && touched.email && (
+                  <div className="errorMessage">{errors.email}</div>
+                )}
+              </div>
+              <div className="field">
+                <Field
+                  type={togglePassword ? "text" : "password"}
+                  className="input"
+                  name="password"
+                  placeholder="Enter Your Password . . ."
+                ></Field>
+                <span className="icon-input">
+                  {togglePassword ? (
+                    <IconEyeOpen
+                      onClick={() => setTogglePassword(false)}
+                    ></IconEyeOpen>
+                  ) : (
+                    <IconEyeClose
+                      onClick={() => setTogglePassword(true)}
+                    ></IconEyeClose>
+                  )}
+                </span>
+                {errors.password && touched.password && (
+                  <div className="errorMessage">{errors.password}</div>
+                )}
+              </div>
+              <div className="text-right">
+                Bạn đã có tài khoản?{" "}
+                <a href="/sign-in" className="cursor-pointer text-primary ">
+                  Đăng nhập
+                </a>
+              </div>
+              <Button type="submit" fluid={true}>
+                Sign Up
+              </Button>
+            </Form>
+          );
+        }}
+      </Formik>
+    </AuthenticationPage>
   );
 };
 

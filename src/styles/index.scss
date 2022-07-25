@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-$primary1: #00A7B4;
-$primary2: #A4D96C;
+$primary1: #00a7b4;
+$primary2: #a4d96c;
 
 @layer base {
   body {
@@ -13,9 +13,24 @@ $primary2: #A4D96C;
 
 @layer components {
   .container-form {
-    @apply m-4 font-body w-[80%] max-w-[700px] min-w-[350px] mx-auto bg-white text-black rounded-lg py-5 px-10;
+    @apply m-4 font-body w-[80%] max-w-[600px] min-w-[350px] mx-auto bg-white text-black rounded-lg py-5 px-10;
   }
-  .bg-linear{
+  .container-page{
+    @apply max-w-[1180px] mx-auto w-full p-5
+  }
+  .bg-linear {
     background: linear-gradient(107.61deg, $primary1 15.59%, $primary2 87.25%);
+  }
+  .field {
+    @apply my-6 relative ;
+  }
+  .input {
+    @apply w-full bg-slate-200 focus:bg-white transition ease-in-out duration-300  outline-none border focus:border-primary focus:rounded-lg p-3 pr-10  text-xl;
+  }
+  .icon-input {
+    @apply cursor-pointer hover:text-secondary transition ease-in-out duration-300 text-slate-400 absolute bottom-[50%] right-3 translate-y-1/2 text-2xl mr-2;
+  }
+  .errorMessage {
+    @apply absolute left-3 -bottom-5  text-sm text-red-500;
   }
 }

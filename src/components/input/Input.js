@@ -5,20 +5,17 @@ const Input = ({
   type = "text",
   children,
   className,
-  control,
   ...props
 }) => {
+
   return (
-    <div className="relative mb-8">
+    <div className="field relative mb-6">
       <input
-        className={`w-full bg-slate-200 focus:bg-white transition ease-in-out duration-300  outline-none border focus:border-primary focus:rounded-lg p-3 text-xl ${className} ${
+        className={`flex-1 bg-slate-200 focus:bg-white transition ease-in-out duration-300  outline-none border focus:border-primary focus:rounded-lg p-3 text-xl ${className} ${
           children && "pr-10"
         }`}
         type={type}
         id={name}
-        control={control}
-        name={name}
-        defaultValue=""
         {...props}
       />
       {children && (

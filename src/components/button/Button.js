@@ -13,6 +13,8 @@ const Button = ({
   fluid,
   type = "button",
   onClick = () => {},
+  primary,
+  secondary,
   ...props
 }) => {
   return (
@@ -20,11 +22,11 @@ const Button = ({
       type={type}
       onClick={onClick}
       {...props}
-      className={` my-4 rounded-lg text-white font-bold p-3 min-w-[100px] ${
-        !disabled
-          ? "bg-primary "
-          : "bg-slate-500 pointer-events-none cursor-not-allowed "
-      } ${fluid && "w-full"} ${className}`}
+      className={` my-4 rounded-lg  font-bold p-3 min-w-[100px] ${
+        primary && "text-white bg-primary"
+      } ${className} ${
+        disabled && "bg-slate-500 text-secondary pointer-events-none cursor-not-allowed "
+      } ${fluid && "w-full"} ${secondary && "text-secondary bg-white"} `}
     >
       {children}
     </button>

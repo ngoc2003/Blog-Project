@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase.config";
 import { Button } from "../button";
 import { toast } from "react-toastify";
+import { Input } from "../input";
+import { GrSearch } from "react-icons/gr";
 
 const NavList = [
   {
@@ -35,21 +37,34 @@ const Header = () => {
   }
   return (
     <div className="bg-white">
-      <div className="container-page flex justify-between items-center font-semibold">
-        <a href="/" className="text-primary text-4xl">
+      <div className="flex items-center justify-between font-semibold container-page">
+        <a href="/" className="text-4xl text-primary">
           BLG
         </a>
         <div>
-          {/* <NavLink></NavLink> */}
           {NavList.map((item) => (
-            <NavLink to={item.url} className={({ isActive }) => `px-6 ${isActive && 'navbar-active'}`}>
+            <NavLink
+              key={item.name}
+              to={item.url}
+              className={({ isActive }) =>
+                `px-6 ${isActive && "navbar-active"}`
+              }
+            >
               {item.name}
             </NavLink>
           ))}
         </div>
-        <Button type="button" onClick={handleSignOut}>
-          Sign Out
-        </Button>
+          <Input
+            placeholder="Search here . . ."
+            className={"py-1.5 rounded-lg"}
+          >
+            <GrSearch></GrSearch>
+          </Input>
+          {/* <div>
+            <Button primary type="button" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          </div> */}
       </div>
     </div>
   );

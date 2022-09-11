@@ -7,7 +7,7 @@ $primary2: #a4d96c;
 
 @layer base {
   body {
-    @apply bg-primary text-secondary;
+    @apply bg-primary text-text1;
   }
 }
 
@@ -15,14 +15,14 @@ $primary2: #a4d96c;
   .container-form {
     @apply m-4 font-body w-[80%] max-w-[600px] min-w-[350px] mx-auto bg-white text-black rounded-lg py-5 px-10;
   }
-  .container-page{
-    @apply max-w-[1180px] mx-auto w-full 
+  .container-page {
+    @apply max-w-[1180px] mx-auto w-full;
   }
   .bg-linear {
     background: linear-gradient(107.61deg, $primary1 15.59%, $primary2 87.25%);
   }
   .field {
-    @apply my-6 relative ;
+    @apply my-6 relative;
   }
   .input {
     @apply w-full bg-slate-200 focus:bg-white transition ease-in-out duration-300  outline-none border focus:border-primary focus:rounded-lg p-3 pr-10  text-xl;
@@ -33,12 +33,27 @@ $primary2: #a4d96c;
   .errorMessage {
     @apply absolute left-3 -bottom-5  text-sm text-red-500;
   }
-  .navbar-active{
+  .navbar-active {
     @apply text-primary relative;
-    &::after{
-      content:'';
-      @apply block absolute left-1/2 -bottom-2 bg-primary h-1 w-5 rounded-full -translate-x-1/2
+    &::after {
+      content: "";
+      @apply block absolute left-1/2 -bottom-2 bg-primary h-1 w-5 rounded-full -translate-x-1/2;
     }
+  }
+  .overflow-text {
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+  }
+  .title-list{
+    position: relative;
+    &::before{
+      @apply block absolute w-1 h-full top-0 bottom-0 -left-2 bg-primary;
+      content:'';
+      
+      
 
+    }
   }
 }

@@ -16,7 +16,6 @@ const SignInPage = () => {
   const [togglePassword, setTogglePassword] = useState(false);
 
   async function handleSignIn(values) {
-    console.log(1)
     try {
       await signInWithEmailAndPassword(auth, values.email, values.password);
       toast.success("Đăng nhập thành công", {
@@ -90,13 +89,13 @@ const SignInPage = () => {
                     <div className="errorMessage">{errors.password}</div>
                   )}
                 </div>
-                <div className="text-right">
+                {/* <div className="text-right">
                   Bạn chưa có tài khoản?{" "}
                   <a href="/sign-up" className="cursor-pointer text-primary ">
                     Đăng kí
                   </a>
-                </div>
-                <Button type="submit" fluid={true}>
+                </div> */}
+                <Button primary type="submit" fluid={true}>
                   Sign In
                 </Button>
               </Form>

@@ -9,7 +9,6 @@ import { auth, db } from "../firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
 import { addDoc, collection } from "firebase/firestore";
 import AuthenticationPage from "./AuthenticationPage";
-// import logo from "../../public/logo.png";
 
 const SignUpPage = () => {
   const [togglePassword, setTogglePassword] = useState(false);
@@ -113,7 +112,7 @@ const SignUpPage = () => {
                   Đăng nhập
                 </a>
               </div>
-              <Button type="submit" fluid={true}>
+              <Button primary type="submit" fluid={true}>
                 Sign Up
               </Button>
             </Form>

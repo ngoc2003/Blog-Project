@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
-$primary1: #00a7b4;
+// $primary1: #00a7b4;
+$primary1: #1877F2;
 $primary2: #a4d96c;
 
 @layer base {
@@ -46,14 +47,12 @@ $primary2: #a4d96c;
     overflow: hidden;
     display: -webkit-box;
   }
-  .title-list{
+  .title-list {
     position: relative;
-    &::before{
-      @apply block absolute w-1 h-full top-0 bottom-0 -left-2 bg-primary;
-      content:'';
-      
-      
-
+    display: inline-block;
+    &::before {
+      @apply inline-block absolute w-1 h-full top-0 bottom-0 -left-2 bg-primary;
+      content: "";
     }
   }
 }

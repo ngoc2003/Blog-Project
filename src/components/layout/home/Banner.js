@@ -25,7 +25,9 @@ const Banner = () => {
           Remake - We Make: an exhibition about architecture's social agency in
           the face of urbanisation
         </p>
-        <Button primary>Read more</Button>
+        <Button type="button" primary>
+          Read more
+        </Button>
       </div>
     </div>
   );

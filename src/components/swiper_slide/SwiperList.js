@@ -5,15 +5,21 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import SwiperItem from "./SwiperItem";
 
-export default function SwiperList({ data, title = "ReactJs" }) {
+export default function SwiperList({ list }) {
+  const { data, title } = list;
+
   return (
     <>
-      {title ? <h4 className="text-xl font-semibold title-list">{title}</h4> : ""}
+      {title ? (
+        <h4 className="text-xl font-semibold title-list">{title}</h4>
+      ) : (
+        ""
+      )}
       <Swiper
         spaceBetween={30}
         slidesPerView={4}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
         {data &&
           data.length > 0 &&

@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import LayoutPage from "./layouts/LayoutPage";
+import PostDetailPage from "./pages/PostDetailPage";
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route element={<LayoutPage></LayoutPage>}>
             <Route path="/" element={<HomePage></HomePage>}></Route>
+            <Route path="/:id" element={<PostDetailPage></PostDetailPage>}></Route>
           </Route>
           <Route path="*" element={<NotFound></NotFound>}></Route>
           {/* <Route path="/sign-up" element={<SignUpPage></SignUpPage>}></Route> */}

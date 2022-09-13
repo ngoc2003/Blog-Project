@@ -3,6 +3,7 @@ import logo from "../../../images/notFound.png";
 import { Button } from "../../button";
 import FileOpen from "../../icon/FileOpen";
 import Time from "../../icon/Time";
+import { Link } from "react-router-dom";
 const Banner = () => {
   return (
     <div className="min-h-[300px]  overflow-hidden  mx-auto  flex">
@@ -25,9 +26,11 @@ const Banner = () => {
           Remake - We Make: an exhibition about architecture's social agency in
           the face of urbanisation
         </p>
-        <Button type="button" primary>
-          Read more
-        </Button>
+        <Link to={`/`}>
+          <Button type="button" primary>
+            Read more
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase.config";
 import { Button } from "../button";
 import { toast } from "react-toastify";
@@ -38,9 +38,9 @@ const Header = () => {
   return (
     <div className="bg-white">
       <div className="flex items-center justify-between font-semibold container-page">
-        <a href="/" className="text-4xl text-primary">
+        <Link to="/" className="text-4xl text-primary">
           BLG
-        </a>
+        </Link>
         <div>
           {NavList.map((item) => (
             <NavLink

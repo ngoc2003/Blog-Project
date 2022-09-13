@@ -1,11 +1,11 @@
 import React from 'react';
 
-const PostCard = () => {
+const Footer = () => {
     return (
         <div>
-            
+            Footer
         </div>
     );
 };
 
-export default PostCard;
+export default Footer;

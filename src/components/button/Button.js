@@ -22,10 +22,11 @@ const Button = ({
       type={type}
       onClick={onClick}
       {...props}
-      className={` my-4 rounded-lg  font-bold p-3 min-w-[100px] ${
+      className={` my-4 rounded-lg hover:opacity-90 transition-all  font-bold p-3 min-w-[100px] ${
         primary && "text-white bg-primary"
       } ${className} ${
-        disabled && "bg-slate-500 text-secondary pointer-events-none cursor-not-allowed "
+        disabled &&
+        "bg-slate-500 text-secondary pointer-events-none cursor-not-allowed "
       } ${fluid && "w-full"} ${secondary && "text-secondary bg-white"} `}
     >
       {children}

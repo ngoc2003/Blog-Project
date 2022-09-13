@@ -6,6 +6,7 @@ import { Button } from "../button";
 import { toast } from "react-toastify";
 import { Input } from "../input";
 import { GrSearch } from "react-icons/gr";
+import ArrowUp from "../icon/ArrowUp";
 
 const NavList = [
   {
@@ -65,6 +66,10 @@ const Header = () => {
               Sign Out
             </Button>
           </div> */}
+      </div>
+
+      <div className="fixed w-10 h-10 rounded-full bg-primary right-5 bottom-5 opacity-80">
+        <ArrowUp></ArrowUp>
       </div>
     </div>
   );

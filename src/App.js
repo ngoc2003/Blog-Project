@@ -13,11 +13,11 @@ function App() {
         <Routes>
           <Route element={<LayoutPage></LayoutPage>}>
             <Route path="/" element={<HomePage></HomePage>}></Route>
-            <Route path="/:id" element={<PostDetailPage></PostDetailPage>}></Route>
+            <Route path="/blog/:id" element={<PostDetailPage></PostDetailPage>}></Route>
           </Route>
-          <Route path="*" element={<NotFound></NotFound>}></Route>
           {/* <Route path="/sign-up" element={<SignUpPage></SignUpPage>}></Route> */}
           <Route path="/sign-in" element={<SignInPage></SignInPage>}></Route>
+          <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
       </AuthProvider>
     </>

@@ -6,9 +6,10 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import LayoutPage from "./layouts/LayoutPage";
 import PostDetailPage from "./pages/PostDetailPage";
+import ScrollTop from "./modules/ScrollTop";
 function App() {
   return (
-    <>
+    <ScrollTop>
       <AuthProvider>
         <Routes>
           <Route element={<LayoutPage></LayoutPage>}>
@@ -20,7 +21,7 @@ function App() {
           <Route path="*" element={<NotFound></NotFound>}></Route>
         </Routes>
       </AuthProvider>
-    </>
+    </ScrollTop>
   );
 }
 

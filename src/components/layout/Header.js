@@ -17,10 +17,6 @@ const NavList = [
     url: "/blog",
     name: "BLOG",
   },
-  {
-    url: "/contact",
-    name: "CONTACT",
-  },
 ];
 function handleScrollTop() {
   window.scrollTo({

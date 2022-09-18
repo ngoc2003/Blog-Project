@@ -24,7 +24,7 @@ const SignInPage = () => {
       });
       console.log(userInfo)
       setTimeout(() => {
-        navigate("/");
+        navigate("/admin");
       }, 2000);
     } catch (err) {
       toast.error("Please check your email and password");
@@ -32,7 +32,7 @@ const SignInPage = () => {
   }
   useEffect(() => {
     document.title = "Sign In";
-    if (userInfo?.email) navigate("/");
+    if (userInfo?.email) navigate("/admin");
   }, []);
   return (
     <div>

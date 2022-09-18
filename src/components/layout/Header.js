@@ -8,7 +8,7 @@ import { Input } from "../input";
 import { GrSearch } from "react-icons/gr";
 import ArrowUp from "../icon/ArrowUp";
 
-const NavList = [
+const HeaderList = [
   {
     url: "/",
     name: "HOME",
@@ -47,7 +47,7 @@ const Header = () => {
           BLG
         </Link>
         <div>
-          {NavList.map((item) => (
+          {HeaderList.map((item) => (
             <NavLink
               key={item.name}
               to={item.url}

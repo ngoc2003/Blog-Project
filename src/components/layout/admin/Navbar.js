@@ -53,13 +53,17 @@ export default function Navbar() {
               to={navItem.path}
               key={navItem.name}
               className={({ isActive }) =>
-                `flex items-center gap-x-5 justify-center py-4 font-semibold text-center transition duration-300 ease-linear cursor-pointer hover:bg-primary hover:text-white ${
+                `flex items-center justify-center py-4 font-semibold text-center transition duration-300 ease-linear cursor-pointer hover:bg-primary hover:text-white ${
                   isActive && "bg-primary text-white"
                 }`
               }
             >
               {navItem.icon}
-              <span className={`min-w-[60px] ${!showNavbar && "hidden"}`}>
+              <span
+                className={` inline-block ${
+                  !showNavbar ? "w-0 overflow-hidden" : "min-w-[60px] pl-5"
+                }`}
+              >
                 {navItem.name}
               </span>
             </NavLink>

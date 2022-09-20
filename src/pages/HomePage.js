@@ -8,16 +8,17 @@ import Header from "../components/layout/Header";
 import Banner from "../components/layout/home/Banner";
 import SwiperItem from "../components/swiper_slide/SwiperItem";
 import SwiperList from "../components/swiper_slide/SwiperList";
-import { dataTest } from "../utils/dataTest";
-
+// import { GetAllPost } from "../utils/GetAllPost";
+import useGetAllPost from "../hooks/useGetAllBlog";
+// import { dataTest } from "../utils/dataTest";
 
 const HomePage = () => {
+  const data = useGetAllPost();
+  console.log(data ? data : '')
   return (
     <div className="px-10 py-8 mt-10 bg-white rounded-lg container-page ">
-      <Banner></Banner>
-      {dataTest.map((data) => (
-        <SwiperList list={data}></SwiperList>
-      ))}
+      <Banner data={data && data.length > 0 && data}></Banner>
+      <SwiperList data={data}></SwiperList>
     </div>
   );
 };

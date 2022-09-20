@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { dataTest } from "../utils/dataTest";
+// import { dataTest } from "../utils/dataTest";
 import { Link, useLocation, useParams } from "react-router-dom";
 import logo from "../images/notFound.png";
 import { FacebookShareButton, LinkedinShareButton } from "react-share";
@@ -8,7 +8,6 @@ import SwiperItem from "../components/swiper_slide/SwiperItem";
 import { Button } from "../components/button";
 import * as Yup from "yup";
 import { Interweave } from "interweave";
-
 import { Formik, Form, Field } from "formik";
 import {
   collection,
@@ -27,44 +26,43 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 const PostDetailPage = () => {
-  // const postID = useParams();
-  const { state } = useLocation();
+  const postID = useParams().id;
+  // const { state } = useLocation();
+  console.log(postID)
   const [data, setData] = useState("");
   // const { data } = state;
   // const data = collection(db, "posts");
   // const singleDoc = doc(db, "posts", "UdDrNKPmfB8qiYHjLu4n");
 
   useEffect(() => {
-    const singleDoc = doc(db, "posts", "b0fPXHpH0SQ0ifDZIrxh");
-    // getDoc(singleDoc).then( doc => console.log(doc.data()))
+    const singleDoc = doc(db, "posts", postID);
+    const q = query( db, limit(3))
     onSnapshot(singleDoc, (snapshot) => {
-      console.log(snapshot.data());
       setData(snapshot.data());
     });
   }, []);
+  console.log(data)
 
-  console.log(window.location.href);
   return (
     <div className="px-10 py-8 mt-10 bg-white rounded-lg container-page ">
       {/* Title */}
-      <h1 className="text-5xl ">{data.title}</h1>
+      <h1 className="text-5xl ">{data && data.title}</h1>
       {/* Detail */}
       <div className="py-4 text-sm">
         <span className=" text-text3">By </span>
-        {data.author}
+        {data && data.author}
         <span className=" text-text3">
           {"  "}--{"  "}
         </span>
-        {data.createdAt}
+        {data && data.createdAt}
       </div>
       {/* image */}
-      <img src={logo} alt="" className="w-full" />
-
+      <img src={data.image || logo} alt="" className="w-full" />
       {/* Social share */}
       <div className="flex py-4 gap-x-3">
         <FacebookShareButton
           url={window.location.href}
-          quote={data.title}
+          quote={data && data.title}
           className="w-full "
         >
           <div className="bg-[#3b5998] font-bold text-sm h-[32px] flex items-center text-white justify-center hover:opacity-90 ">
@@ -74,7 +72,7 @@ const PostDetailPage = () => {
         </FacebookShareButton>
         <LinkedinShareButton
           url={window.location.href}
-          quote={data.title}
+          quote={data && data.title}
           className="w-full "
         >
           <div className="bg-[#007fb1] font-bold text-sm h-[32px] flex items-center text-white justify-center hover:opacity-90 ">
@@ -86,14 +84,14 @@ const PostDetailPage = () => {
       {/* Content */}
       <div className="relative grid grid-cols-3 gap-x-5">
         <div className="col-span-2">
-          <Interweave content={data.content} />
+          <Interweave content={data && data.content} />
 
           {/* TAGS */}
           <div>
             <div className="tags primary">TAGS</div>
-            {data && data.tags && data.tags.map((tag) => (
-              <div className=" tags">{tag}</div>
-            ))}
+            {data &&
+              data.tags &&
+              data.tags.map((tag) => <div className=" tags">{tag}</div>)}
           </div>
           <hr />
           {/* NEXT AND PREVIOUS */}
@@ -165,15 +163,16 @@ const PostDetailPage = () => {
           </div>
           <h4 className="heading">Categories</h4>
           <div className="py-4">
-            {dataTest.map((item) => (
-              <Link
-                to="/"
-                className="flex items-center justify-between py-2 text-sm font-bold uppercase border-b hover:opacity-80 border-borderGray"
-              >
-                <span className="">{item?.title}</span>
-                <span className="text-text3">(75)</span>
-              </Link>
-            ))}
+            {/* {data && data.tags &&
+              data.map((item) => (
+                <Link
+                  to="/"
+                  className="flex items-center justify-between py-2 text-sm font-bold uppercase border-b hover:opacity-80 border-borderGray"
+                >
+                  <span className="">{item?.title}</span>
+                  <span className="text-text3">(75)</span>
+                </Link>
+              ))} */}
           </div>
         </div>
       </div>

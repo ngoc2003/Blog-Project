@@ -5,12 +5,13 @@ import { withErrorBoundary } from "react-error-boundary";
 import Navbar from "../components/layout/admin/Navbar";
 import Error from "../components/Error";
 
+
 const AdminLayoutPage = () => {
   return (
     <div className="flex h-screen overflow-hidden ">
       <Navbar></Navbar>
-      <div className="flex-1 m-5 overflow-hidden rounded-xl">
-        <div className="w-full h-full p-5 bg-white">
+      <div className="flex-1 m-5  rounded-xl">
+        <div className="w-full h-full p-5 bg-white overflow-y-scroll rounded-xl">
           <Outlet></Outlet>
         </div>
       </div>

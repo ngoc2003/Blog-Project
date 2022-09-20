@@ -15,7 +15,7 @@ export default function AdminBlogPage() {
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
+    <Box sx={{ width: "100%", typography: "body1" }} >
       <TabContext value={value}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -28,6 +28,7 @@ export default function AdminBlogPage() {
         </TabPanel>
         <TabPanel value="2">
           <AddBlog></AddBlog>
+          {/* hi */}
         </TabPanel>
       </TabContext>
     </Box>

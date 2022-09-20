@@ -2,6 +2,9 @@ import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase.config";
 import { DataGrid } from "@mui/x-data-grid";
+// import {} from '../'
+// import {GetAllPost} from '../../utils/GetAllPost'
+import useGetAllPost from "../../hooks/useGetAllBlog";
 
 const columns = [
   { field: "stt", headerName: "STT", width: 70 },
@@ -27,29 +30,8 @@ function DataTable({ data }) {
   );
 }
 const ListBlog = () => {
-  const dataDb = collection(db, "posts");
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    getDocs(dataDb)
-    .then((snapshot) => {
-        let index = 1;
-        let posts = [];
-        snapshot.forEach((item) => {
-          posts.push({
-            ...item.data(),
-            id: item.id,
-            stt: index ,
-          });
-          index++;
-        });
-        setData(posts);
-      })
-
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-  console.log(data ? data : "");
+  const data= useGetAllPost()
+  // console.log(data)
 
   return (
     <div>

@@ -4,31 +4,37 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import SwiperItem from "./SwiperItem";
+import { useGetCategorize } from "../../hooks/useGetCategorize";
 
-export default function SwiperList({ list }) {
-  const { data, title } = list;
+export default function SwiperList({ data = "" }) {
+  const categorize = useGetCategorize();
 
   return (
     <>
-      {title ? (
-        <h4 className="text-xl font-semibold title-list">{title}</h4>
-      ) : (
-        ""
-      )}
-      <Swiper
-        spaceBetween={30}
-        slidesPerView={4}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={(swiper) => console.log(swiper)}
-      >
-        {data &&
-          data.length > 0 &&
-          data.map((item) => (
-            <SwiperSlide>
-              <SwiperItem data={item} key={item.id}></SwiperItem>
-            </SwiperSlide>
-          ))}
-      </Swiper>
+      {categorize &&
+        categorize.length > 0 &&
+        categorize.map((categorizeItem) => (
+          <div key={categorizeItem.name}>
+            <h4 className="text-xl font-semibold capitalize title-list">
+              {categorizeItem.name}
+            </h4>
+            <Swiper spaceBetween={30} slidesPerView={4}>
+              {data &&
+                data.length > 0 &&
+                data
+                  .filter((item) => {
+                    if (categorizeItem.name === item.categorize) {
+                      return item;
+                    }
+                  })
+                  .map((item) => (
+                    <SwiperSlide key={item.id}>
+                      <SwiperItem data={item}></SwiperItem>
+                    </SwiperSlide>
+                  ))}
+            </Swiper>
+          </div>
+        ))}
     </>
   );
 }

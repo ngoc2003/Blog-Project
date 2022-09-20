@@ -4,8 +4,9 @@ import logo from "../../images/notFound.png";
 import FileOpen from "../icon/FileOpen";
 import Time from "../icon/Time";
 const SwiperItem = ({ data }) => {
+  console.log(data)
   return (
-    <Link to={`/blog/${data.id}`} state={{data: data}}>
+    <Link to={`/blog/${data.id}`}>
       <div className="py-3">
         <img src={logo} alt="" className="rounded-xl " />
         <div className="px-4 py-3">

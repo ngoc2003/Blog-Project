@@ -90,6 +90,7 @@ const AddBlog = () => {
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
         ["link", "image"],
         [{ color: ["#FFFFFF", "#e60000"] }],
+        ["code-block"],
       ],
     }),
     []
@@ -168,11 +169,13 @@ const AddBlog = () => {
                     label="Categorize"
                     onChange={handleChange}
                   >
-                    {categorizeList && categorizeList.length>0 && categorizeList.map((item) => (
-                      <MenuItem key={item.name} value={item.name}>
-                        {item.name}
-                      </MenuItem>
-                    ))}
+                    {categorizeList &&
+                      categorizeList.length > 0 &&
+                      categorizeList.map((item) => (
+                        <MenuItem key={item.name} value={item.name}>
+                          {item.name}
+                        </MenuItem>
+                      ))}
                   </Select>
                 </FormControl>
               </Box>

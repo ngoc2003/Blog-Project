@@ -27,18 +27,15 @@ async function handleDeleTePost(postId) {
 
 function DataTable({ data }) {
   const [deleteButton, setShowDeleteButton] = useState(false);
+  const [deleteList, setDeleteList] = useState([])
   const onRowsSelectionHandler = (ids) => {
     const selectedRowsData = ids.map((id) => data.find((row) => row.id === id));
     if (selectedRowsData.length > 0) {
       setShowDeleteButton(true);
-      selectedRowsData.forEach( item => {
-        handleDeleTePost(item.id)
-      })
-      // handleDeleTePost()
     } else {
       setShowDeleteButton(false);
     }
-    console.log(selectedRowsData);
+    setDeleteList(selectedRowsData)
   };
   return (
     <div className="w-full h-[400px] relative ">
@@ -48,7 +45,11 @@ function DataTable({ data }) {
             ? "opacity-80 pointer-events-auto"
             : "pointer-events-none opacity-0"
         }`}
-        onClick={() => {}}
+        onClick={() => {
+          deleteList.forEach((item) => {
+            handleDeleTePost(item.id);
+          });
+        }}
       >
         Delete
       </div>

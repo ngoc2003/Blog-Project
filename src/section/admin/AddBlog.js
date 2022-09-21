@@ -30,7 +30,6 @@ const AddBlog = () => {
   const [categorize, setCategorize] = useState("");
   const dataDb = collection(db, "posts");
   const categorizeList = useGetCategorize();
-  // console.log(categorizeList)
   const handleChange = (event) => {
     setCategorize(event.target.value);
   };
@@ -121,7 +120,7 @@ const AddBlog = () => {
         content: Yup.string().required("Vui Lòng Điền Trường Này"),
       })}
       onSubmit={(values) => {
-        // handleSubmit(values);
+        handleSubmit(values);
         // console.log(values);
       }}
     >

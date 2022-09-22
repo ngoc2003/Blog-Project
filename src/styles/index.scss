@@ -90,6 +90,12 @@
     }
   }
 }
+pre{
+  @apply bg-slate-900 text-white p-4 shadow-inner shadow-gray-700 rounded-lg my-2
+}
 .ql-editor {
   height: 150px !important;
+}
+h2{
+  @apply text-3xl py-2
 }

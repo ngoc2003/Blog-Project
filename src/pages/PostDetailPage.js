@@ -25,23 +25,32 @@ import {
   query,
 } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
+import { handleChangeSecondToDate } from "../modules/handleChangeSecondToDate";
 const PostDetailPage = () => {
   const postID = useParams().id;
-  // const { state } = useLocation();
-  console.log(postID)
   const [data, setData] = useState("");
-  // const { data } = state;
-  // const data = collection(db, "posts");
-  // const singleDoc = doc(db, "posts", "UdDrNKPmfB8qiYHjLu4n");
+  const [popularPost, setPopularPost] = useState([]);
+  const postsDb = collection(db, "posts");
 
   useEffect(() => {
     const singleDoc = doc(db, "posts", postID);
-    const q = query( db, limit(3))
     onSnapshot(singleDoc, (snapshot) => {
       setData(snapshot.data());
     });
   }, []);
-  console.log(data)
+  useEffect(() => {
+    const q = query(postsDb, orderBy("createdAt"), limit(4));
+    onSnapshot(q, (snapshot) => {
+      let posts = [];
+      snapshot.docs.forEach((doc) => {
+        posts.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+      setPopularPost(posts);
+    });
+  }, []);
 
   return (
     <div className="px-10 py-8 mt-10 bg-white rounded-lg container-page ">
@@ -54,7 +63,7 @@ const PostDetailPage = () => {
         <span className=" text-text3">
           {"  "}--{"  "}
         </span>
-        {data && data.createdAt}
+        {data && handleChangeSecondToDate(data.createdAt.seconds)}
       </div>
       {/* image */}
       <img src={data.image || logo} alt="" className="w-full" />
@@ -159,7 +168,9 @@ const PostDetailPage = () => {
         <div className="sticky col-span-1">
           <div>
             <h4 className="heading">Popuar Post</h4>
-            <SwiperItem data={data}></SwiperItem>
+            {popularPost.map((post) => (
+              <SwiperItem key={post.id} data={post}></SwiperItem>
+            ))}
           </div>
           <h4 className="heading">Categories</h4>
           <div className="py-4">

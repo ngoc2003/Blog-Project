@@ -17,7 +17,7 @@ const SwiperItem = ({ data }) => {
             </div>
             <div className="flex items-center h-6 py-4 text-sm gap-x-2 ">
               <Time></Time>
-              <p>{handleChangeSecondToDate(data.createdAt.seconds)}</p>
+              <p>{data && handleChangeSecondToDate(data.createdAt.seconds)}</p>
             </div>
           </div>
           <h4 className="text-base font-semibold overflow-text">

@@ -8,19 +8,21 @@ import {
 import { db } from "../firebase/firebase.config";
 
 export const useGetCategorize = () => {
-  const dataDb = collection(db, "blogs");
+  const dataDb = collection(db, "categorizes");
 
   const [categorizeList, setCategorizeList] = useState("");
   useEffect(() => {
     getDocs(dataDb)
       .then((snapshot) => {
+        console.log(snapshot)
         let data = [];
         snapshot.forEach((item) => {
+          console.log(item.data())
           data.push({
             ...item.data(),
-            id: item.id,
           });
         });
+        console.log(data)
         setCategorizeList(data[0].categorize);
       })
       .catch((err) => {

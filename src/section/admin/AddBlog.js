@@ -11,6 +11,8 @@ import {
   collection,
   serverTimestamp,
   getDocs,
+  doc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase/firebase.config";
 import Box from "@mui/material/Box";
@@ -20,15 +22,19 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import { useGetCategorize } from "../../hooks/useGetCategorize";
+// import Compressor from "compressorjs";
 // import ImageUploader from "react-quill-image-uploader";
-// Quill.register("modules/imageUploader", ImageUploader);
+// Quill.register("modules/imageUploader", imageHandlers);
 // var quillObj;
 
 const AddBlog = () => {
+  const quillRef = useRef("");
   const [imagePreview, setImagePreview] = useState("");
   const [url, setUrl] = useState("");
   const [categorize, setCategorize] = useState("");
+  // const [urlImgDetail, setUrlImgDetail] = useState("");
   const dataDb = collection(db, "posts");
+  const cateDb = collection(db, "blogs");
   const categorizeList = useGetCategorize();
   const handleChange = (event) => {
     setCategorize(event.target.value);
@@ -64,6 +70,14 @@ const AddBlog = () => {
             pauseOnHover: false,
             autoClose: 2000,
           });
+          categorizeList.forEach((item) => {
+            if (item.name === categorize) {
+              item.number = item.number + 1;
+            }
+          });
+          updateDoc(cateDb, {
+            ...categorizeList,
+          });
           setTimeout(() => {
             window.location.reload();
           }, 2000);
@@ -80,17 +94,32 @@ const AddBlog = () => {
     }
   };
 
+  function imageHandlers() {
+    // const input = document.createElement("input");
+    // input.setAttribute("type", "file");
+    // input.click();
+    // const file = input.files[0];
+    // handleUploadImage("images_detail", file, setUrlImgDetail); // API post, returns image location as string e.g. 'http://www.example.com/images/foo.png'
+    // var range = this.quill.getSelection();
+    //   this.quill.insertEmbed(range.index, "image", urlImgDetail);
+  }
+
   const modules = useMemo(
     () => ({
-      toolbar: [
-        ["bold", "italic", "underline", "strike"],
-        ["blockquote"],
-        [{ list: "ordered" }, { list: "bullet" }],
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        ["link", "image"],
-        [{ color: ["#FFFFFF", "#e60000"] }],
-        ["code-block"],
-      ],
+      toolbar: {
+        container: [
+          ["bold", "italic", "underline", "strike"],
+          ["blockquote"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ header: [1, 2, 3, 4, 5, 6, false] }],
+          ["link", "image"],
+          [{ color: ["#FFFFFF", "#e60000"] }],
+          ["code-block"],
+        ],
+        handlers: {
+          // image: imageHandlers,
+        },
+      },
     }),
     []
   );
@@ -128,7 +157,7 @@ const AddBlog = () => {
         return (
           <Form className="w-full">
             <div className="flex w-full gap-x-5">
-              <div className="field">
+              <div className="w-full field">
                 <Field name="title">
                   {({ field }) => (
                     <TextField
@@ -143,7 +172,7 @@ const AddBlog = () => {
                   )}
                 </Field>
               </div>
-              <div className="field">
+              <div className="w-full field">
                 <Field name="tags">
                   {({ field }) => (
                     <TextField
@@ -211,6 +240,7 @@ const AddBlog = () => {
               <Field name="content">
                 {({ field }) => (
                   <ReactQuill
+                    ref={quillRef}
                     theme="snow"
                     modules={modules}
                     value={field.value}

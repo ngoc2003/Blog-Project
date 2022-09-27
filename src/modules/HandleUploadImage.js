@@ -9,13 +9,18 @@ import db from "../firebase/firebase.config";
 const storage = getStorage();
 
 const handleUploadImage = (path, image, setImg = () => {}) => {
+  console.log(image)
   if (!image) {
     console.log("No Image");
     return "";
   } else if (image) {
-    image.preview = URL.createObjectURL(image);
+    try {
+      image.preview = URL.createObjectURL(image);
+    } catch (err) {
+      console.log(err);
+    }
     const file = image;
-    const storageRef = ref(storage, path+'/' + file.name);
+    const storageRef = ref(storage, path + "/" + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
     uploadTask.on(
       "state_changed",

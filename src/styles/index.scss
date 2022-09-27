@@ -89,6 +89,16 @@
       }
     }
   }
+  .hover-img {
+    img{
+      @apply duration-200 ease-linear;
+    }
+    &:hover{
+      img{
+        @apply scale-125 ;
+      }
+    }
+  }
 }
 pre{
   @apply bg-slate-900 text-white p-4 shadow-inner shadow-gray-700 rounded-lg my-2

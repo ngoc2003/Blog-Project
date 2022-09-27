@@ -8,7 +8,7 @@ module.exports = {
       },
       colors: {
         // primary: "#2EBAC1",
-        current: 'currentColor',
+        current: "currentColor",
         primary: "#1877F2",
         secondary: "#292D32", //text
         third: "#a4d96c",

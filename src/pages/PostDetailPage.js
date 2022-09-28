@@ -26,6 +26,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase.config";
 import { handleChangeSecondToDate } from "../modules/handleChangeSecondToDate";
+import ListCategorize from "../section/detail/ListCategorize";
 const PostDetailPage = () => {
   const postID = useParams().id;
   const [data, setData] = useState("");
@@ -100,7 +101,7 @@ const PostDetailPage = () => {
             <div className="tags primary">TAGS</div>
             {data &&
               data.tags &&
-              data.tags.map((tag) => <div className=" tags">{tag}</div>)}
+              data.tags.map((tag) => <div className="tags" key={tag}>{tag}</div>)}
           </div>
           <hr />
           {/* NEXT AND PREVIOUS */}
@@ -172,19 +173,7 @@ const PostDetailPage = () => {
               <SwiperItem key={post.id} data={post}></SwiperItem>
             ))}
           </div>
-          <h4 className="heading">Categories</h4>
-          <div className="py-4">
-            {/* {data && data.tags &&
-              data.map((item) => (
-                <Link
-                  to="/"
-                  className="flex items-center justify-between py-2 text-sm font-bold uppercase border-b hover:opacity-80 border-borderGray"
-                >
-                  <span className="">{item?.title}</span>
-                  <span className="text-text3">(75)</span>
-                </Link>
-              ))} */}
-          </div>
+          <ListCategorize></ListCategorize>
         </div>
       </div>
     </div>

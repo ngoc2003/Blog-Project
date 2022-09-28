@@ -14,7 +14,6 @@ export const useGetCategorize = () => {
   useEffect(() => {
     getDocs(dataDb)
       .then((snapshot) => {
-        console.log(snapshot)
         let data = [];
         snapshot.forEach((item) => {
           console.log(item.data())
@@ -22,7 +21,6 @@ export const useGetCategorize = () => {
             ...item.data(),
           });
         });
-        console.log(data)
         setCategorizeList(data[0].categorize);
       })
       .catch((err) => {

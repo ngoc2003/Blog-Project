@@ -66,7 +66,7 @@ const AddBlog = () => {
         updatedAt: serverTimestamp(),
       })
         .then(() => {
-          toast.success("Add New Blog Success", {
+          toast.success("Add New Blog Successfully", {
             pauseOnHover: false,
             autoClose: 2000,
           });

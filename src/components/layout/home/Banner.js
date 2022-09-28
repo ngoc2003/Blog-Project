@@ -8,7 +8,7 @@ import useGetAllPost from "../../../hooks/useGetAllBlog";
 import { handleChangeSecondToDate } from "../../../modules/handleChangeSecondToDate";
 const Banner = ({data}) => {
   return (
-    <div  className="min-h-[300px]  overflow-hidden  mx-auto  flex mb-10">
+    <div  className="min-h-[300px]  overflow-hidden  mx-auto  flex mb-5">
       <img src={data && data.image} alt="" className="w-1/2 rounded-lg" />
       <div className="px-5 py-3">
         <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">

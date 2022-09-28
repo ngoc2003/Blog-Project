@@ -76,6 +76,7 @@
   .title-list {
     position: relative;
     display: inline-block;
+    margin-top:20px;
     &::before {
       @apply inline-block absolute w-1 h-full top-0 bottom-0 -left-2 bg-primary;
       content: "";

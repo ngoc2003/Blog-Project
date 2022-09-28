@@ -7,7 +7,7 @@ import Time from "../icon/Time";
 const SwiperItem = ({ data }) => {
   return (
     <Link to={`/blog/${data.id}`}>
-      <div className="py-3 hover-img">
+      <div className="pb-3 mt-6 border hover-img">
         <div className = 'overflow-hidden'>
           <img src={data.image} alt="" />
         </div>

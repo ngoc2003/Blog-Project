@@ -5,10 +5,7 @@ import logo from "../images/notFound.png";
 import { FacebookShareButton, LinkedinShareButton } from "react-share";
 import { FacebookIcon, LinkedinIcon } from "react-share";
 import SwiperItem from "../components/swiper_slide/SwiperItem";
-import { Button } from "../components/button";
-import * as Yup from "yup";
 import { Interweave } from "interweave";
-import { Formik, Form, Field } from "formik";
 import {
   collection,
   addDoc,
@@ -27,6 +24,7 @@ import {
 import { db } from "../firebase/firebase.config";
 import { handleChangeSecondToDate } from "../modules/handleChangeSecondToDate";
 import ListCategorize from "../section/detail/ListCategorize";
+import ReplyLetter from "../section/ReplyLetter";
 const PostDetailPage = () => {
   const postID = useParams().id;
   const [data, setData] = useState("");
@@ -123,48 +121,7 @@ const PostDetailPage = () => {
             <div className="pt-5 heading">Related Post</div>
           </div> */}
           {/* Comment */}
-          <div>
-            <h4 className="my-4 text-3xl font-bold">Leave a Reply!</h4>
-            <p>Send me any question and I will try to answer it!</p>
-            <Formik
-              initialValues={{
-                email: "",
-                name: "",
-                message: "",
-              }}
-              onSubmit={(values) => {}}
-            >
-              {({ errors, touched }) => {
-                return (
-                  <Form className="w-full">
-                    <div className="flex field gap-x-5">
-                      <Field
-                        className="input"
-                        name="email"
-                        placeholder="Your Email . . ."
-                      ></Field>
-
-                      <Field
-                        className="input"
-                        name="name"
-                        placeholder="Your Name . . ."
-                      ></Field>
-                    </div>
-                    <Field
-                      className="input"
-                      name="email"
-                      as="textarea"
-                      rows={4}
-                      placeholder="Your Message . . ."
-                    ></Field>
-                    <Button primary type="submit" fluid={true}>
-                      Send
-                    </Button>
-                  </Form>
-                );
-              }}
-            </Formik>
-          </div>
+          <ReplyLetter></ReplyLetter>
         </div>
         <div className="sticky col-span-1">
           <div>

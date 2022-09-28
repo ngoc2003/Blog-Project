@@ -93,9 +93,15 @@
     img{
       @apply duration-200 ease-linear;
     }
+    h4{
+      @apply duration-200 ease-linear;
+    }
     &:hover{
       img{
         @apply scale-125 ;
+      }
+      h4{
+        text-decoration:underline;
       }
     }
   }

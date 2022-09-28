@@ -21,7 +21,7 @@ export const useGetCategorize = () => {
             ...item.data(),
           });
         });
-        setCategorizeList(data[0].categorize);
+        setCategorizeList(data&& data.length>0 &&data[0].categorize);
       })
       .catch((err) => {
         console.log(err);

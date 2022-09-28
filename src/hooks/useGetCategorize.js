@@ -16,7 +16,6 @@ export const useGetCategorize = () => {
       .then((snapshot) => {
         let data = [];
         snapshot.forEach((item) => {
-          console.log(item.data())
           data.push({
             ...item.data(),
           });

@@ -13,7 +13,7 @@ const Input = ({
     <div className="relative mb-6 field">
       <input
         onFocus={() => hasFocus(true)}
-        onBlur={() => hasFocus(false)}
+        // onBlur={() => hasFocus(false)}
         className={`flex-1 bg-slate-200 focus:bg-white transition ease-in-out duration-300  outline-none border focus:border-primary focus:rounded-lg p-3 text-xl ${className} ${
           children && "pr-10"
         }`}

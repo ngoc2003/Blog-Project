@@ -12,7 +12,6 @@ import useGetAllPost from "../../hooks/useGetAllBlog";
 import { handleChangeSecondToDate } from "../../modules/handleChangeSecondToDate";
 import FileOpen from "../icon/FileOpen";
 import Time from "../icon/Time";
-
 const HeaderList = [
   {
     url: "/",
@@ -30,7 +29,7 @@ function handleScrollTop() {
   });
 }
 const Header = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // function handleSignOut() {
   //   signOut(auth);
   //   toast.success("Đăng xuất thành công", {
@@ -43,7 +42,6 @@ const Header = () => {
   // }
   const [filter, setFilter] = useState("");
   const filterDebounce = useDebounce(filter, 500);
-  // const dataDb = collection(db, "posts");
   const [showSearchResult, setShowSearchResult] = useState(false);
   const [data, setData] = useState([]);
   const dataAll = useGetAllPost();
@@ -87,7 +85,7 @@ const Header = () => {
             </NavLink>
           ))}
         </div>
-        <div className="relative ">
+        <div className="relative " onBlur={() => {setShowSearchResult(false)}}>
           <Input
             placeholder="Search here . . ."
             className={"py-1.5 rounded-lg relative"}
@@ -103,9 +101,16 @@ const Header = () => {
           >
             {data && data.length > 0 ? (
               data.map((item, index) => (
-                <Link to={`/blog/${item.id}`}>
+                <div
+                  key={item.id}
+                  onMouseDown={() => {
+                    setShowSearchResult(false);
+                    navigate(`/blog/${item.id}`);
+                    window.location.reload()
+                  }}
+                >
                   {index !== 0 && <hr className="my-3" />}
-                  <div className="flex gap-4 hover-img" key={item.id}>
+                  <div className="flex gap-4 hover-img">
                     <div className="flex-1 object-cover overflow-hidden">
                       <img src={item.image} alt="" className="w-full" />
                     </div>
@@ -126,7 +131,7 @@ const Header = () => {
                       <h4>{item.title}</h4>
                     </div>
                   </div>
-                </Link>
+                </div>
               ))
             ) : (
               <div className="font-medium text-center text-text3">

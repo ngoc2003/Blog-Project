@@ -16,9 +16,6 @@ const HomePage = () => {
   const data = useGetAllPost();
   // const dataBanner = data && data.length > 0 ? data[0] : "";
   const dataBanner = data[0]
-  console.log(data[0]);
-
-  console.log(data);
   // console.log(data ? data : "");
   return (
     <div className="px-10 py-8 mt-10 bg-white rounded-lg container-page ">

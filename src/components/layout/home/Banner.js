@@ -4,29 +4,30 @@ import { Button } from "../../button";
 import FileOpen from "../../icon/FileOpen";
 import Time from "../../icon/Time";
 import { Link } from "react-router-dom";
+import useGetAllPost from "../../../hooks/useGetAllBlog";
+import { handleChangeSecondToDate } from "../../../modules/handleChangeSecondToDate";
 const Banner = ({data}) => {
   return (
-    <div className="min-h-[300px]  overflow-hidden  mx-auto  flex">
-      <img src={logo} alt="" className="w-1/2 rounded-lg" />
+    <div className="min-h-[300px]  overflow-hidden  mx-auto  flex mb-10">
+      <img src={data && data.image} alt="" className="w-1/2 rounded-lg" />
       <div className="px-5 py-3">
         <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">
           <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">
             <FileOpen></FileOpen>
-            <p>Architecture</p>
+            <p>{data && data.categorize}</p>
           </div>
           <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">
             <Time></Time>
-            <p>March 3</p>
+            <p>{handleChangeSecondToDate(data && data.createdAt.seconds)}</p>
           </div>
         </div>
         <h4 className="text-xl font-bold text-text1">
-          Remake - We Make architecture exhibition
+          {data && data.title}
         </h4>
         <p className="py-4 text-sm font-medium text-text3">
-          Remake - We Make: an exhibition about architecture's social agency in
-          the face of urbanisation
+          {data && data.des|| ''}
         </p>
-        <Link to={`/blog/${data.id}`}>
+        <Link to={`/blog/${data && data.id}`}>
           <Button type="button" primary>
             Read more
           </Button>

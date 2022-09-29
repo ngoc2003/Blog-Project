@@ -8,7 +8,7 @@ const SwiperItem = ({ data }) => {
   return (
     <Link to={`/blog/${data.id}`}>
       <div className="pb-3 mt-6 border hover-img">
-        <div className = 'overflow-hidden'>
+        <div className="overflow-hidden">
           <img src={data.image} alt="" />
         </div>
         <div className="px-4 py-3">

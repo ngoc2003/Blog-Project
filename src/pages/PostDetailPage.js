@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 // import { dataTest } from "../utils/dataTest";
 import { Link, useLocation, useParams } from "react-router-dom";
 import logo from "../images/notFound.png";
-import { FacebookShareButton, LinkedinShareButton } from "react-share";
-import { FacebookIcon, LinkedinIcon } from "react-share";
 import SwiperItem from "../components/swiper_slide/SwiperItem";
 import { Interweave } from "interweave";
 import {
@@ -25,6 +23,8 @@ import { db } from "../firebase/firebase.config";
 import { handleChangeSecondToDate } from "../modules/handleChangeSecondToDate";
 import ListCategorize from "../section/detail/ListCategorize";
 import ReplyLetter from "../section/ReplyLetter";
+import FacebookShare from "../components/share_btn/FacebookShare";
+import LinkedinShare from "../components/share_btn/LinkedinShare";
 const PostDetailPage = () => {
   const postID = useParams().id;
   const [data, setData] = useState("");
@@ -68,26 +68,8 @@ const PostDetailPage = () => {
       <img src={data.image || logo} alt="" className="w-full" />
       {/* Social share */}
       <div className="flex py-4 gap-x-3">
-        <FacebookShareButton
-          url={window.location.href}
-          quote={data && data.title}
-          className="w-full "
-        >
-          <div className="bg-[#3b5998] font-bold text-sm h-[32px] flex items-center text-white justify-center hover:opacity-90 ">
-            <FacebookIcon size={32} />
-            Share on Facebook
-          </div>
-        </FacebookShareButton>
-        <LinkedinShareButton
-          url={window.location.href}
-          quote={data && data.title}
-          className="w-full "
-        >
-          <div className="bg-[#007fb1] font-bold text-sm h-[32px] flex items-center text-white justify-center hover:opacity-90 ">
-            <LinkedinIcon size={32} />
-            Share on Linkedin
-          </div>
-        </LinkedinShareButton>
+        <FacebookShare data={data}></FacebookShare>
+        <LinkedinShare data={data}></LinkedinShare>
       </div>
       {/* Content */}
       <div className="relative grid grid-cols-3 gap-x-5">
@@ -99,7 +81,11 @@ const PostDetailPage = () => {
             <div className="tags primary">TAGS</div>
             {data &&
               data.tags &&
-              data.tags.map((tag) => <div className="tags" key={tag}>{tag}</div>)}
+              data.tags.map((tag) => (
+                <div className="tags" key={tag}>
+                  {tag}
+                </div>
+              ))}
           </div>
           <hr />
           {/* NEXT AND PREVIOUS */}

@@ -17,7 +17,7 @@ const Loading = ({ children }) => {
     setShowLoading(true);
     const timer = setTimeout(() => {
       setShowLoading(false);
-    }, 2000);
+    }, 1000);
     return () => {
       clearTimeout(timer);
     };

@@ -1,7 +1,11 @@
 {
-  "name": "react-monkey-blogging-boilerplate",
+  "name": "Blog-Project",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngoc2003/Blog-Project.git"
+  },
   "dependencies": {
     "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.4",

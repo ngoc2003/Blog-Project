@@ -8,6 +8,7 @@ import { useGetCategorize } from "../../hooks/useGetCategorize";
 import { doc } from "firebase/firestore";
 export default function SwiperList({ data = "" }) {
   const categorize = useGetCategorize();
+  console.log(categorize)
   // const 
 
   return (
@@ -15,7 +16,7 @@ export default function SwiperList({ data = "" }) {
       {categorize &&
         categorize.length > 0 &&
         categorize.map((categorizeItem) => {
-          return categorizeItem && categorizeItem.number !== 0 ? (
+          return categorizeItem && categorizeItem.number != 0 ? (
             <div key={categorizeItem.name}>
               <h4 className="text-xl font-semibold capitalize title-list">
                 {categorizeItem.name}

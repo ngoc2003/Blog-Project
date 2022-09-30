@@ -14,6 +14,7 @@ import useGetAllPost from "../hooks/useGetAllBlog";
 
 const HomePage = () => {
   const data = useGetAllPost();
+  // console.log(data)
   // const dataBanner = data && data.length > 0 ? data[0] : "";
   const dataBanner = data[0]
   // console.log(data ? data : "");

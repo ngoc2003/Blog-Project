@@ -15,6 +15,7 @@ const columns = [
   { field: "author", headerName: "Author", width: 120 },
   // { field: "updatedAt", headerName: "Last modified", width: 200 },
   { field: "content", headerName: "Content", width: 300 },
+  {field: 'options', headerName:'Option', width: 150}
 ];
 async function handleDeleTePost(postId) {
   const deleteData = doc(db, "posts", postId);
@@ -37,6 +38,13 @@ function DataTable({ data }) {
     }
     setDeleteList(selectedRowsData)
   };
+        // const updateData= (id) => {
+
+        // } 
+        // data.forEach( item => return( {
+        //   ...item,
+
+        // }))
   return (
     <div className="w-full h-[400px] relative ">
       <div

@@ -34,8 +34,10 @@ const AddBlog = () => {
   const [categorize, setCategorize] = useState("");
   // const [urlImgDetail, setUrlImgDetail] = useState("");
   const dataDb = collection(db, "posts");
+  const [ categorizeList, categorizeListId]= useGetCategorize();
+  console.log(categorizeListId)
   const cateDb = collection(db, "blogs");
-  const categorizeList = useGetCategorize();
+  console.log(cateDb)
   const handleChange = (event) => {
     setCategorize(event.target.value);
   };
@@ -45,7 +47,7 @@ const AddBlog = () => {
     try {
       let tags = obj.tags;
       try {
-        tags = obj.tags.split(" ");
+        tags = obj.tags.split(",");
       } catch (err) {
         console.log(err);
       }
@@ -70,13 +72,14 @@ const AddBlog = () => {
             pauseOnHover: false,
             autoClose: 2000,
           });
-          categorizeList.forEach((item) => {
-            if (item.name === categorize) {
-              item.number = item.number + 1;
-            }
+          const updateCategorizeList = categorizeList.map((item) => {
+            return item.name === categorize ? 
+            {...item, 
+              number : `${item.number + 1}`}  : item
           });
+          console.log(updateCategorizeList)
           updateDoc(cateDb, {
-            ...categorizeList,
+            ...updateCategorizeList,
           });
           setTimeout(() => {
             window.location.reload();
@@ -142,6 +145,7 @@ const AddBlog = () => {
         tags: "",
         author: "Bui Ngoc",
         image: "",
+        des: "",
       }}
       validationSchema={Yup.object({
         // categorize: Yup.string().required().oneOf(["Event", "Blog"]),
@@ -188,6 +192,21 @@ const AddBlog = () => {
                 </Field>
               </div>
             </div>
+            <div className="w-full field">
+              <Field name="des">
+                {({ field }) => (
+                  <TextField
+                    id="outlined-basic"
+                    label="Desciption"
+                    variant="outlined"
+                    placeholder="Enter Your Short Description . . ."
+                    value={field.value}
+                    onChange={field.onChange(field.name)}
+                    className="w-full"
+                  />
+                )}
+              </Field>
+            </div>
             <div className="field">
               <Box sx={{ minWidth: 120 }}>
                 <FormControl fullWidth>
@@ -208,6 +227,7 @@ const AddBlog = () => {
                 </FormControl>
               </Box>
             </div>
+
             <div className="field">
               <Field
                 render={({ field }) => {

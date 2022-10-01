@@ -4,7 +4,7 @@ const link = [
   {
     name: "facebook",
     icons: <FacebookIcon size={40}></FacebookIcon>,
-    href: "fb.com/Bui.Ngoc.1302",
+    href: "https://www.facebook.com/Bui.Ngoc.1302/",
   },
   {
     name: "email",

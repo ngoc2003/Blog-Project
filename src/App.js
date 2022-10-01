@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./contexts/auth-context";
+import { AuthProvider, useAuth } from "./contexts/auth-context";
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import SignInPage from "./pages/SignInPage";
@@ -12,7 +12,13 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminBlogPage from "./pages/admin/AdminBlogPage";
 import CategorizePage from "./pages/CategorizePage";
 import Loading from './components/loading/Loading'
+
+
 function App() {
+  
+
+
+
   return (
     <ScrollTop>
       <Loading>

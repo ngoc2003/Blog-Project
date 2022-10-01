@@ -8,9 +8,6 @@ import { useGetCategorize } from "../../hooks/useGetCategorize";
 import { doc } from "firebase/firestore";
 export default function SwiperList({ data = "" }) {
   const categorize = useGetCategorize();
-  console.log(categorize)
-  // const 
-
   return (
     <>
       {categorize &&

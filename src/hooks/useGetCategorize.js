@@ -11,24 +11,22 @@ export const useGetCategorize = () => {
   const dataDb = collection(db, "categorizes");
 
   const [categorizeList, setCategorizeList] = useState("");
-  const [categorizeListId, setCategorizeListId] = useState("");
   useEffect(() => {
     getDocs(dataDb)
       .then((snapshot) => {
         let data = [];
-        snapshot.forEach((item) => {
+        snapshot.docs.forEach((item) => {
           data.push({
-            id: item.id,
             ...item.data(),
+            id: item.id,
           });
         });
-        setCategorizeList(data&& data.length>0 &&data[0].categorize);
-        setCategorizeListId(data[0].id)
-        // console.log(data[0].id)
+        setCategorizeList(data&& data.length>0 &&data);
+        // console.log(data)
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  return categorizeList, categorizeListId  ;
+  return categorizeList  ;
 };

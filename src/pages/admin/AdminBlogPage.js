@@ -28,7 +28,6 @@ export default function AdminBlogPage() {
         </TabPanel>
         <TabPanel value="2">
           <AddBlog></AddBlog>
-          {/* hi */}
         </TabPanel>
       </TabContext>
     </Box>

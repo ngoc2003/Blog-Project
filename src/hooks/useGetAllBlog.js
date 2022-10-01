@@ -10,7 +10,7 @@ export default function useGetAllPost () {
       .then((snapshot) => {
         let index = 1;
         let posts = [];
-        snapshot.forEach((item) => {
+        snapshot.docs.forEach((item) => {
           posts.push({
             ...item.data(),
             id: item.id,

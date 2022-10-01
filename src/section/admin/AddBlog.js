@@ -22,22 +22,25 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import { useGetCategorize } from "../../hooks/useGetCategorize";
+import HandleUpdateNumberCate from "../../modules/HandleUpdateNumberCate";
 // import Compressor from "compressorjs";
 // import ImageUploader from "react-quill-image-uploader";
 // Quill.register("modules/imageUploader", imageHandlers);
 // var quillObj;
 
 const AddBlog = () => {
-  const quillRef = useRef("");
+  // const quillRef = useRef("");
+
+  const categorizeList= useGetCategorize();
   const [imagePreview, setImagePreview] = useState("");
   const [url, setUrl] = useState("");
-  const [categorize, setCategorize] = useState("");
+  const [categorize, setCategorize] = useState('');
   // const [urlImgDetail, setUrlImgDetail] = useState("");
   const dataDb = collection(db, "posts");
-  const [ categorizeList, categorizeListId]= useGetCategorize();
-  console.log(categorizeListId)
-  const cateDb = collection(db, "blogs");
-  console.log(cateDb)
+  // const cateDb = collection(db, "categorizes");
+
+  
+
   const handleChange = (event) => {
     setCategorize(event.target.value);
   };
@@ -51,13 +54,6 @@ const AddBlog = () => {
       } catch (err) {
         console.log(err);
       }
-
-      console.log({
-        ...obj,
-        imageName: imagePreview && imagePreview.name ? imagePreview.name : "",
-        image: url ? url : "",
-        tags: tags,
-      });
       addDoc(dataDb, {
         ...obj,
         categorize: categorize ? categorize : "other",
@@ -72,29 +68,23 @@ const AddBlog = () => {
             pauseOnHover: false,
             autoClose: 2000,
           });
-          const updateCategorizeList = categorizeList.map((item) => {
-            return item.name === categorize ? 
-            {...item, 
-              number : `${item.number + 1}`}  : item
-          });
-          console.log(updateCategorizeList)
-          updateDoc(cateDb, {
-            ...updateCategorizeList,
-          });
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 2000);
         })
-        .catch((err) => {
-          toast.error("Add New Blog Failed", {
-            pauseOnHover: false,
-            autoClose: 2000,
-          });
-          console.log(err);
-        });
+        .then ( () => {
+          HandleUpdateNumberCate(categorizeList,categorize)
+        })
     } catch (err) {
+      toast.error("Add New Blog Failed", {
+        pauseOnHover: false,
+        autoClose: 2000,
+      });
       console.log(err);
     }
+
+    
+    
   };
 
   function imageHandlers() {
@@ -154,7 +144,6 @@ const AddBlog = () => {
       })}
       onSubmit={(values) => {
         handleSubmit(values);
-        // console.log(values);
       }}
     >
       {({ errors, touched, setFieldValue }) => {
@@ -219,7 +208,7 @@ const AddBlog = () => {
                     {categorizeList &&
                       categorizeList.length > 0 &&
                       categorizeList.map((item) => (
-                        <MenuItem key={item.name} value={item.name}>
+                        <MenuItem key={item.id} value={item.name}>
                           {item.name}
                         </MenuItem>
                       ))}
@@ -260,7 +249,7 @@ const AddBlog = () => {
               <Field name="content">
                 {({ field }) => (
                   <ReactQuill
-                    ref={quillRef}
+                    // ref={quillRef}
                     theme="snow"
                     modules={modules}
                     value={field.value}

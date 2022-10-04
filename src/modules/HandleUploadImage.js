@@ -9,7 +9,6 @@ import db from "../firebase/firebase.config";
 const storage = getStorage();
 
 const handleUploadImage = (path, image, setImg = () => {}) => {
-  console.log(image)
   if (!image) {
     console.log("No Image");
     return "";

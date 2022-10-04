@@ -68,9 +68,9 @@ const AddBlog = () => {
             pauseOnHover: false,
             autoClose: 2000,
           });
-          // setTimeout(() => {
-          //   window.location.reload();
-          // }, 2000);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         })
         .then ( () => {
           HandleUpdateNumberCate(categorizeList,categorize)

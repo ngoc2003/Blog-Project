@@ -52,7 +52,7 @@ const PostDetailPage = () => {
   }, []);
 
   return (
-    <div className="px-10 py-8 mt-10 bg-white rounded-lg container-page ">
+    <div className="px-10 py-8 mt-10 bg-white container-page ">
       {/* Title */}
       <h1 className="text-5xl ">{data && data.title}</h1>
       {/* Detail */}
@@ -67,12 +67,12 @@ const PostDetailPage = () => {
       {/* image */}
       <img src={data.image || logo} alt="" className="w-full" />
       {/* Social share */}
-      <div className="flex py-4 gap-x-3">
+      <div className="flex flex-col gap-3 py-4 xs:flex-row ">
         <FacebookShare data={data}></FacebookShare>
         <LinkedinShare data={data}></LinkedinShare>
       </div>
       {/* Content */}
-      <div className="relative grid grid-cols-3 gap-x-5">
+      <div className="relative lg:grid lg:grid-cols-3 gap-x-5">
         <div className="col-span-2">
           <Interweave content={data && data.content} />
 

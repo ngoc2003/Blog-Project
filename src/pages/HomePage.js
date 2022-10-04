@@ -19,7 +19,7 @@ const HomePage = () => {
   const dataBanner = data[0]
   // console.log(data ? data : "");
   return (
-    <div className="px-10 py-8 mt-10 bg-white rounded-lg container-page ">
+    <div className="px-10 py-8 mt-10 bg-white container-page ">
       <Banner data={dataBanner}></Banner>
       <SwiperList data={data}></SwiperList>
     </div>

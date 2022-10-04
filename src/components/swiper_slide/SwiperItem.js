@@ -8,8 +8,8 @@ const SwiperItem = ({ data }) => {
   return (
     <Link to={`/blog/${data.id}`}>
       <div className="pb-3 mt-6 border hover-img">
-        <div className="overflow-hidden">
-          <img src={data.image} alt="" />
+        <div className="flex items-center justify-center overflow-hidden">
+          <img src={data.image} alt="" className="min-h-[180px] max-h-[180px] object-cover"/>
         </div>
         <div className="px-4 py-3">
           <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">

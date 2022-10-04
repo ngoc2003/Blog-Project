@@ -21,7 +21,7 @@ const link = [
 const Footer = () => {
   const date = new Date();
   return (
-    <div className="flex flex-col items-center justify-center px-10 py-8 my-10 bg-white rounded-lg gap-y-5 container-page">
+    <div className="flex flex-col items-center justify-center px-10 py-8 my-10 bg-white gap-y-5 container-page">
       <div className="flex items-center justify-center gap-x-5">
         {link.map((item) => (
           <a

@@ -1,11 +1,10 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
 import SwiperItem from "./SwiperItem";
 import { useGetCategorize } from "../../hooks/useGetCategorize";
-import { doc } from "firebase/firestore";
+// import { doc } from "firebase/firestore";
 export default function SwiperList({ data = "" }) {
   const categorize = useGetCategorize();
   return (
@@ -18,7 +17,21 @@ export default function SwiperList({ data = "" }) {
               <h4 className="text-xl font-semibold capitalize title-list">
                 {categorizeItem.name}
               </h4>
-              <Swiper spaceBetween={30} slidesPerView={4}>
+              <Swiper
+                spaceBetween={30}
+                slidesPerView={1}
+                breakpoints={{
+                  620: {
+                    slidesPerView: 2,
+                  },
+                  800: {
+                    slidesPerView: 3,
+                  },
+                  1150: {
+                    slidesPerView: 4,
+                  },
+                }}
+              >
                 {data &&
                   data.length > 0 &&
                   data

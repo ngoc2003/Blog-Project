@@ -5,10 +5,7 @@ import { Button } from "../components/button";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
 const ReplyLetter = () => {
-  const form = useRef();
   const sendEmail = (values) => {
-    // e.preventDefault();
-    console.log(values)
     emailjs
       .send(
         "service_eq29oeo",
@@ -18,7 +15,6 @@ const ReplyLetter = () => {
       )
       .then(
         (result) => {
-          //   console.log(result.text);
           toast.success("Send Mail Successfully", {
             pauseOnHover: false,
             autoClose: 2000,
@@ -33,7 +29,6 @@ const ReplyLetter = () => {
         }
       );
   };
-  console.log(window.location);
   return (
     <div>
       <h4 className="my-4 text-3xl font-bold">Leave a Reply!</h4>
@@ -52,7 +47,7 @@ const ReplyLetter = () => {
         {({ errors, touched }) => {
           return (
             <Form className="w-full">
-              <div className="flex field gap-x-5">
+              <div className="flex flex-col field gap-x-5 gap-y-5 xs:flex-row">
                 <Field
                   className="input"
                   name="email"

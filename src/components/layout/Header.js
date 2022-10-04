@@ -12,6 +12,7 @@ import useGetAllPost from "../../hooks/useGetAllBlog";
 import { handleChangeSecondToDate } from "../../modules/handleChangeSecondToDate";
 import FileOpen from "../icon/FileOpen";
 import Time from "../icon/Time";
+import Bar from "../icon/Bar";
 const HeaderList = [
   {
     url: "/",
@@ -30,6 +31,8 @@ function handleScrollTop() {
 }
 const Header = () => {
   const navigate = useNavigate();
+  const navRef = useRef()
+  const navBarRef = useRef()
   // function handleSignOut() {
   //   signOut(auth);
   //   toast.success("Đăng xuất thành công", {
@@ -57,8 +60,14 @@ const Header = () => {
       setData([]);
     }
   }, [filterDebounce]);
+  document.addEventListener('click', (e) => {
+    if (e.target !== navRef.current && e.target.tagName !== 'path' && e.target !== navBarRef) {
+      setShowNav(false)
+    }
+  })
 
   const [scroll, setScroll] = useState(false);
+  const [showNav, setShowNav] = useState(false)
   function handleChange(e) {
     setFilter(e.target.value);
   }
@@ -68,34 +77,47 @@ const Header = () => {
   });
   return (
     <div className="bg-white">
-      <div className="flex items-center justify-between font-semibold container-page">
-        <Link to="/" className="text-4xl text-primary">
-          BLG
-        </Link>
-        <div>
-          {HeaderList.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.url}
-              className={({ isActive }) =>
-                `px-6 ${isActive && "navbar-active"}`
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
+      <div className="relative flex items-center justify-between font-semibold container-page">
+      <span onClick={() => setShowNav(true)} ref={navBarRef}>
+        <Bar className = 'text-xl rotate-90 text-primary sm:hidden' ></Bar>
+      </span>
+        <div  ref={navRef} className = {`z-10 fixed top-0 bottom-0 left-0 flex flex-col items-center sm:justify-around bg-white shadow-lg w-[200px] sm:flex-1 sm:static sm:flex-row sm:shadow-none duration-300 ease-out ${!showNav? '-translate-x-full' : 'translate-x-0'} sm:translate-x-0 `}>
+          <Link to="/" className="py-10 text-4xl sm:py-0 text-primary">
+            BLG
+          </Link>
+          <div className="">
+            {HeaderList.map((item) => (
+              <>
+                
+              <NavLink
+                key={item.name}
+                to={item.url}
+                className={({ isActive }) =>
+                  `px-6 my-5 sm:my-0    ${isActive && "navbar-active block sm:inline-block"}`
+                }
+              >
+                {item.name}
+              </NavLink>
+              </>
+            ))}
+          </div>
         </div>
-        <div className="relative " onBlur={() => {setShowSearchResult(false)}}>
+        <div
+          className="relative pl-5"
+          onBlur={() => {
+            setShowSearchResult(false);
+          }}
+        >
           <Input
             placeholder="Search here . . ."
-            className={"py-1.5 rounded-lg relative"}
+            className={" py-1 xs:py-1.5 rounded-lg relative"}
             onChange={handleChange}
             hasFocus={setShowSearchResult}
           >
             <GrSearch></GrSearch>
           </Input>
           <div
-            className={`absolute top-14 mt-4 -left-1/2 -right-4 z-20 flex-col  h-auto bg-white border shadow-2xl min-h-[100px] rounded-lg p-3 ${
+            className={`absolute top-14 mt-4 -left-1/3 -right-4 z-20 flex-col  h-auto bg-white border shadow-2xl min-h-[100px] rounded-lg p-3 ${
               showSearchResult ? "flex" : "hidden"
             } items-center justify-center`}
           >
@@ -106,13 +128,13 @@ const Header = () => {
                   onMouseDown={() => {
                     setShowSearchResult(false);
                     navigate(`/blog/${item.id}`);
-                    window.location.reload()
+                    window.location.reload();
                   }}
                 >
                   {index !== 0 && <hr className="my-3" />}
                   <div className="flex gap-4 hover-img">
-                    <div className="flex-1 object-cover overflow-hidden">
-                      <img src={item.image} alt="" className="w-full" />
+                    <div className="flex items-center flex-1 object-cover overflow-hidden">
+                      <img src={item.image} alt="" className="object-cover w-full" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">

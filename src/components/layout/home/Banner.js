@@ -6,11 +6,13 @@ import Time from "../../icon/Time";
 import { Link } from "react-router-dom";
 import useGetAllPost from "../../../hooks/useGetAllBlog";
 import { handleChangeSecondToDate } from "../../../modules/handleChangeSecondToDate";
-const Banner = ({data}) => {
+const Banner = ({ data }) => {
   return (
-    <div  className="min-h-[300px]  overflow-hidden  mx-auto  flex mb-5">
-      <img src={data && data.image} alt="" className="w-1/2 rounded-lg" />
-      <div className="px-5 py-3">
+    <div className="min-h-[300px]  overflow-hidden  mx-auto  flex mb-5 flex-col sm:flex-row">
+      <div className="flex items-center flex-1">
+        <img src={data && data.image} alt="" className="object-cover w-full rounded-lg" />
+      </div>
+      <div className="flex-1 px-5 py-3">
         <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">
           <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">
             <FileOpen></FileOpen>
@@ -21,11 +23,9 @@ const Banner = ({data}) => {
             <p>{handleChangeSecondToDate(data && data.createdAt.seconds)}</p>
           </div>
         </div>
-        <h4 className="text-xl font-bold text-text1">
-          {data && data.title}
-        </h4>
+        <h4 className="text-xl font-bold text-text1">{data && data.title}</h4>
         <p className="py-4 text-sm font-medium text-text3">
-          {data && data.des|| ''}
+          {(data && data.des) || ""}
         </p>
         <Link to={`/blog/${data && data.id}`}>
           <Button type="button" primary>

@@ -22,7 +22,6 @@ const SignInPage = () => {
         pauseOnHover: false,
         autoClose: 2000,
       });
-      console.log(userInfo)
       setTimeout(() => {
         navigate("/admin");
       }, 2000);

@@ -14,7 +14,7 @@
     @apply m-4 font-body w-[80%] max-w-[600px] min-w-[350px] mx-auto bg-white text-black rounded-lg py-5 px-10;
   }
   .container-page {
-    @apply max-w-[1180px] mx-auto w-full;
+    @apply max-w-[1180px] mx-auto w-full px-5 lg:rounded-lg;
   }
   .bg-linear {
     @apply bg-gradient-to-right from-primary to-third;
@@ -32,7 +32,7 @@
     @apply absolute left-3 -bottom-5  text-sm text-red-500;
   }
   .navbar-active {
-    @apply text-primary relative;
+    @apply  text-primary relative ;
     &::after {
       content: "";
       @apply block absolute left-1/2 -bottom-2 bg-primary h-1 w-5 rounded-full -translate-x-1/2;

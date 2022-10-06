@@ -7,6 +7,7 @@ const FacebookShare = ({ data }) => {
     <FacebookShareButton
       url={window.location.href}
       quote={data && data.title}
+      imageURL={data && data.image}
       hashtag={"#BuiNgoc"}
       descriotion={data && data.des}
       className="w-full "

@@ -16,14 +16,17 @@ const CategorizePage = () => {
         Find {data.length} {data.length > 1 ? "results" : "result"} for '
         {categorizeName}'
       </h1>
-      <hr className='my-5'/>
-      <div className="grid grid-cols-4">
-        {data && data.length > 0 ? data.map( item => (
+      <hr className="my-5" />
+      <div className="grid grid-cols-1 gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2">
+        {data && data.length > 0 ? (
+          data.map((item) => (
             <SwiperItem data={item} key={item.id}></SwiperItem>
-        )) : <p className="text-text3">Please try other tag instead!</p>}
+          ))
+        ) : (
+          <p className="text-text3">Please try other tag instead!</p>
+        )}
       </div>
     </div>
-    
   );
 };
 

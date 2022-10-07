@@ -27,7 +27,7 @@ const Banner = ({ data }) => {
         <p className="py-4 text-sm font-medium text-text3">
           {(data && data.des) || ""}
         </p>
-        <Link to={`/blog/${data && data.id}`}>
+        <Link to={`/${data && data.id}`}>
           <Button type="button" primary>
             Read more
           </Button>

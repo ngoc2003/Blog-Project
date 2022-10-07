@@ -13,7 +13,7 @@ const ListCategorize = () => {
           categorize.length>0 &&
           categorize.map((item) => (
             <Link
-              to={`/blog/categorize/${item.name}`}
+              to={`/categorize/${item.name}`}
               className="flex items-center justify-between py-2 text-sm font-bold uppercase border-b hover:opacity-80 border-borderGray"
             >
               <span className="">{item?.name}</span>

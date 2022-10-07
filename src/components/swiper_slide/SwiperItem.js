@@ -6,7 +6,7 @@ import FileOpen from "../icon/FileOpen";
 import Time from "../icon/Time";
 const SwiperItem = ({ data }) => {
   return (
-    <Link to={`/blog/${data.id}`}>
+    <Link to={`/${data.id}`}>
       <div className="pb-3 mt-6 border hover-img">
         <div className="flex items-center justify-center overflow-hidden">
           <img src={data.image} alt="" className="min-h-[180px] max-h-[180px] object-cover"/>

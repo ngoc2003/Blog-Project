@@ -19,8 +19,8 @@ const HeaderList = [
     name: "HOME",
   },
   {
-    url: "/blog",
-    name: "BLOG",
+    url: "/about",
+    name: "ABOUT",
   },
 ];
 function handleScrollTop() {
@@ -31,8 +31,8 @@ function handleScrollTop() {
 }
 const Header = () => {
   const navigate = useNavigate();
-  const navRef = useRef()
-  const navBarRef = useRef()
+  const navRef = useRef();
+  const navBarRef = useRef();
   // function handleSignOut() {
   //   signOut(auth);
   //   toast.success("Đăng xuất thành công", {
@@ -60,14 +60,18 @@ const Header = () => {
       setData([]);
     }
   }, [filterDebounce]);
-  document.addEventListener('click', (e) => {
-    if (e.target !== navRef.current && e.target.tagName !== 'path' && e.target !== navBarRef) {
-      setShowNav(false)
+  document.addEventListener("click", (e) => {
+    if (
+      e.target !== navRef.current &&
+      e.target.tagName !== "path" &&
+      e.target !== navBarRef
+    ) {
+      setShowNav(false);
     }
-  })
+  });
 
   const [scroll, setScroll] = useState(false);
-  const [showNav, setShowNav] = useState(false)
+  const [showNav, setShowNav] = useState(false);
   function handleChange(e) {
     setFilter(e.target.value);
   }
@@ -78,26 +82,32 @@ const Header = () => {
   return (
     <div className="bg-white">
       <div className="relative flex items-center justify-between font-semibold container-page">
-      <span onClick={() => setShowNav(true)} ref={navBarRef}>
-        <Bar className = 'text-xl rotate-90 text-primary sm:hidden' ></Bar>
-      </span>
-        <div  ref={navRef} className = {`z-10 fixed top-0 bottom-0 left-0 flex flex-col items-center sm:justify-around bg-white shadow-lg w-[200px] sm:flex-1 sm:static sm:flex-row sm:shadow-none duration-300 ease-out ${!showNav? '-translate-x-full' : 'translate-x-0'} sm:translate-x-0 `}>
+        <span onClick={() => setShowNav(true)} ref={navBarRef}>
+          <Bar className="text-xl rotate-90 text-primary sm:hidden"></Bar>
+        </span>
+        <div
+          ref={navRef}
+          className={`z-10 fixed top-0 bottom-0 left-0 flex flex-col items-center sm:justify-around bg-white shadow-lg w-[200px] sm:flex-1 sm:static sm:flex-row sm:shadow-none duration-300 ease-out ${
+            !showNav ? "-translate-x-full" : "translate-x-0"
+          } sm:translate-x-0 `}
+        >
           <Link to="/" className="py-10 text-4xl sm:py-0 text-primary">
             BLG
           </Link>
           <div className="">
             {HeaderList.map((item) => (
               <>
-                
-              <NavLink
-                key={item.name}
-                to={item.url}
-                className={({ isActive }) =>
-                  `px-6 my-5 sm:my-0    ${isActive && "navbar-active block sm:inline-block"}`
-                }
-              >
-                {item.name}
-              </NavLink>
+                <NavLink
+                  key={item.name}
+                  to={item.url}
+                  className={({ isActive }) =>
+                    `px-6 my-5 sm:my-0    ${
+                      isActive && "navbar-active block sm:inline-block"
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
               </>
             ))}
           </div>
@@ -127,14 +137,18 @@ const Header = () => {
                   key={item.id}
                   onMouseDown={() => {
                     setShowSearchResult(false);
-                    navigate(`/blog/${item.id}`);
+                    navigate(`/${item.id}`);
                     window.location.reload();
                   }}
                 >
                   {index !== 0 && <hr className="my-3" />}
-                  <div className="flex gap-4 hover-img">
+                  <div className="flex gap-4 cursor-pointer hover-img">
                     <div className="flex items-center flex-1 object-cover overflow-hidden">
-                      <img src={item.image} alt="" className="object-cover w-full" />
+                      <img
+                        src={item.image}
+                        alt=""
+                        className="object-cover w-full"
+                      />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">
@@ -170,7 +184,7 @@ const Header = () => {
       </div>
 
       <div
-        className={`fixed flex items-center justify-center duration-500 linear bg-white rounded-full shadow-lg cursor-pointer w-14 h-14 text-primary opacity-80 right-5  ${
+        className={`fixed flex items-center justify-center duration-500 linear  rounded-full shadow-lg cursor-pointer w-14 h-14 text-white bg-primary  bg-opacity-50  right-1/2 translate-x-1/2 z-50  ${
           scroll ? "bottom-5" : "-bottom-full"
         }`}
         onClick={handleScrollTop}

@@ -17,7 +17,7 @@ module.exports = {
         current: "currentColor",
         primary: "#1877F2",
         secondary: "#292D32", //text
-        third: "#a4d96c",
+        third: "#343a40",
         text1: "#171725",
         text3: "#808191",
         borderGray: "#eee",

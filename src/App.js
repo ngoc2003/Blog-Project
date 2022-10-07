@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider, useAuth } from "./contexts/auth-context";
-import HomePage from "./pages/HomePage";
+import ContactPage from "./pages/ConactPage";
 import NotFound from "./pages/NotFound";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -11,27 +11,27 @@ import AdminLayoutPage from "./layouts/AdminLayoutPage";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminBlogPage from "./pages/admin/AdminBlogPage";
 import CategorizePage from "./pages/CategorizePage";
-import Loading from './components/loading/Loading'
-
+import Loading from "./components/loading/Loading";
+import BlogPage from "./pages/BlogPage";
 
 function App() {
-  
-
-
-
   return (
     <ScrollTop>
       <Loading>
         <AuthProvider>
           <Routes>
             <Route element={<LayoutPage></LayoutPage>}>
-              <Route path="/" element={<HomePage></HomePage>}></Route>
+              <Route path="/" element={<BlogPage></BlogPage>}></Route>
               <Route
-                path="/blog/:id"
+                path="/about"
+                element={<ContactPage></ContactPage>}
+              ></Route>
+              <Route
+                path="/:id"
                 element={<PostDetailPage></PostDetailPage>}
               ></Route>
               <Route
-                path="/blog/categorize/:categorizeName"
+                path="/categorize/:categorizeName"
                 element={<CategorizePage></CategorizePage>}
               ></Route>
             </Route>

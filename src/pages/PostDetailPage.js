@@ -6,15 +6,8 @@ import SwiperItem from "../components/swiper_slide/SwiperItem";
 import { Interweave } from "interweave";
 import {
   collection,
-  addDoc,
-  deleteDoc,
-  getDocs,
   doc,
   onSnapshot,
-  serverTimestamp,
-  updateDoc,
-  getDoc,
-  where,
   orderBy,
   limit,
   query,
@@ -25,16 +18,23 @@ import ListCategorize from "../section/detail/ListCategorize";
 import ReplyLetter from "../section/ReplyLetter";
 import FacebookShare from "../components/share_btn/FacebookShare";
 import LinkedinShare from "../components/share_btn/LinkedinShare";
+import useGetNextBlog from "../hooks/useGetNextBlog";
+import useGetPreviousBlog from "../hooks/useGetPreviousBlog";
 const PostDetailPage = () => {
   const postID = useParams().id;
   const [data, setData] = useState("");
   const [popularPost, setPopularPost] = useState([]);
   const postsDb = collection(db, "posts");
+  const next = useGetNextBlog(data && data);
+  const previous = useGetPreviousBlog(data && data);
 
   useEffect(() => {
     const singleDoc = doc(db, "posts", postID);
     onSnapshot(singleDoc, (snapshot) => {
-      setData(snapshot.data());
+      setData({
+        id: snapshot.id,
+        ...snapshot.data(),
+      });
     });
   }, []);
   useEffect(() => {
@@ -89,15 +89,23 @@ const PostDetailPage = () => {
           </div>
           <hr />
           {/* NEXT AND PREVIOUS */}
-          <div className="flex justify-between py-5 gap-x-5">
-            <Link to="/" className="flex-1 prev-post">
-              <div className="text-sm font-bold text-text3">Previous Post</div>
-              <div className="ml-2 title-list secondary">HI</div>
-            </Link>
-            <Link to="/" className="flex-1 next-post">
-              <div className="text-sm font-bold text-text3">Next Post</div>
-              <div className="ml-2 title-list secondary">HI</div>
-            </Link>
+          <div className="flex justify-between py-5 text-xs xs:text-sm sm:text-md gap-x-5">
+            {previous && (
+              <Link to={`/${previous.id}`} className="flex-1 prev-post">
+                <div className="text-sm font-bold text-text3">
+                  Previous Post
+                </div>
+                <div className="ml-2 title-list secondary">
+                  {previous.title}
+                </div>
+              </Link>
+            )}
+            {next && (
+              <Link to={`/${next.id}`} className="flex-1 next-post">
+                <div className="text-sm font-bold text-text3">Next Post</div>
+                <div className="ml-2 title-list secondary">{next.title}</div>
+              </Link>
+            )}
           </div>
           <hr />
           {/* Author Content */}

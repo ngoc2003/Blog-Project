@@ -18,10 +18,10 @@ const HeaderList = [
     url: "/",
     name: "HOME",
   },
-  {
-    url: "/about",
-    name: "ABOUT",
-  },
+  // {
+  //   url: "/about",
+  //   name: "ABOUT",
+  // },
 ];
 function handleScrollTop() {
   window.scrollTo({

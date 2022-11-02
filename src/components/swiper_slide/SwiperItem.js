@@ -7,11 +7,11 @@ import Time from "../icon/Time";
 const SwiperItem = ({ data }) => {
   return (
     <Link to={`/${data.id}`}>
-      <div className="pb-3 mt-6 border hover-img">
-        <div className="flex items-center justify-center overflow-hidden">
-          <img src={data.image} alt="" className="min-h-[180px] max-h-[180px] object-cover"/>
+      <div className="pb-3 mx-2 mt-6 border hover-img">
+        <div className="flex items-center justify-center overflow-hidden max-h-[180px] min-h-[180px]">
+          <img src={data.image} alt="" className="object-cover w-full h-full "/>
         </div>
-        <div className="px-4 py-3">
+        <div className="px-4 py-3 ">
           <div className="flex items-center h-6 py-4 text-sm gap-x-3 text-text3">
             <div className="flex items-center h-6 py-4 text-sm gap-x-2 ">
               <FileOpen></FileOpen>

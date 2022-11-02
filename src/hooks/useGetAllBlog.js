@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase/firebase.config";
 
@@ -6,7 +6,8 @@ export default function useGetAllPost () {
   const dataDb = collection(db, "posts");
   const [data, setData] = useState([]);
   useEffect(() => {
-    getDocs(dataDb)
+    const q = query(dataDb, orderBy('createdAt'))
+    getDocs(q)
       .then((snapshot) => {
         let index = 1;
         let posts = [];
@@ -26,6 +27,6 @@ export default function useGetAllPost () {
       });
   }, []);
 
-  return data ? data : "";
+  return data ? data.reverse() : "";
 };
 

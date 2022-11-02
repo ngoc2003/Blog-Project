@@ -22,7 +22,6 @@ export const useGetCategorize = () => {
           });
         });
         setCategorizeList(data&& data.length>0 &&data);
-        // console.log(data)
       })
       .catch((err) => {
         console.log(err);

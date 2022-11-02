@@ -10,12 +10,10 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  // <React.StrictMode>
       <BrowserRouter>
         <App />
         <ToastContainer></ToastContainer>
       </BrowserRouter>
-  // </React.StrictMode>
 );
 
 reportWebVitals();
